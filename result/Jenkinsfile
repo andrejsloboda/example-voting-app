@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:14.21-alpine3.15'
+        }
+    }
 
     tools {
         nodejs 'NodeJS 8.9.0'
@@ -12,7 +16,7 @@ pipeline {
             }
             steps {
                 echo 'Compiling worker app'
-                dir('worker'){
+                dir('result'){
                     sh 'npm install'
                 }
             }
@@ -23,7 +27,7 @@ pipeline {
             }
             steps {
                 echo 'Running Unit Tests on worker app'
-                dir('worker'){
+                dir('result'){
                     sh 'npm install'
                     sh 'npm test'
                 }
