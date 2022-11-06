@@ -39,7 +39,6 @@ pipeline {
         }
         stage('docker-package') {
             when{
-                branch 'master'
                 chnageset "**/worker/**"
             }
             steps {
