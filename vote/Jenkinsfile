@@ -33,11 +33,13 @@ pipeline {
             steps {
                 echo 'Running Unit Tests on vote app'
                 dir('vote'){
+                    sh 'pip install -r requirements.txt'
                     sh 'nosetests -v'
                 }
             }
         }
         stage('docker-package') {
+            agent any
             when{
                 changeset "**/vote/**"
                 branch "master"

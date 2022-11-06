@@ -1,10 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:14.21-alpine3.15'
-        }
-    }
+    agent none
+
     stages {
+        agent {
+            docker {
+                image 'node:14.21-alpine3.15'
+            }
+        }
         stage('build') {
             when{
                 changeset "**/result/**"
@@ -17,6 +19,11 @@ pipeline {
             }
         }
         stage('test') {
+            agent {
+                docker {
+                    image 'node:14.21-alpine3.15'
+                }
+            }
             when {
                 changeset "**/result/**"
             }
@@ -29,6 +36,7 @@ pipeline {
             }
         }
         stage('docker-package') {
+            agent any
             when{
                 changeset "**/result/**"
                 branch "master"
