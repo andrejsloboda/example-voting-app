@@ -25,7 +25,7 @@ pipeline {
         stage('package') {
             when{
                 branch 'master'
-                chnageset "**/worker/**"
+                changeset "**/worker/**"
             }
             steps {
                 echo 'Packageging worker app'
