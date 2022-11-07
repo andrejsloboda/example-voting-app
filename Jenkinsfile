@@ -120,7 +120,7 @@ pipeline {
         }
         steps {
             echo 'Packaging result app with docker'
-            sript{
+            script{
                 docker.withRegistry('https://index.docker.io/v1', 'dockerlogin'){
                     def workerImage = docker.build("slobodaandrej/result:v${env.BUILD_ID}", "./result")
                     workerImage.push()
@@ -172,7 +172,7 @@ pipeline {
         }
         steps {
             echo 'Packaging vote app with docker'
-            sript{
+            script{
                 docker.withRegistry('https://index.docker.io/v1', 'dockerlogin'){
                     def workerImage = docker.build("slobodaandrej/vote:v${env.BUILD_ID}", "./vote")
                     workerImage.push()
@@ -182,7 +182,7 @@ pipeline {
         }
     }
   }
-  
+
   post{
     always{
         echo 'Building multibranch pipeline for worker is completed..'
