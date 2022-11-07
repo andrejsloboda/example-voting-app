@@ -113,7 +113,11 @@ pipeline {
         }
     }
     stage('result docker-package') {
-        agent any
+        agent {
+            docker {
+                image 'node:14.21-alpine3.15'
+            }
+        }
         when{
             changeset "**/result/**"
             branch "master"
